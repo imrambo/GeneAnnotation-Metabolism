@@ -25,15 +25,14 @@ RUN mkdir /build/DIAMOND && cd /build/DIAMOND \
 ENV PATH "$PATH:/build/DIAMOND"
 
 RUN mkdir /build/dbCAN
-RUN cd /build/dbCAN && wget http://bcb.unl.edu/dbCAN2/download/Tools/run_dbcan_v3.tar.gz
-RUN cd /build/dbCAN \
-    && tar -zxf run_dbcan_v3.tar.gz \
+RUN cd /build && wget http://bcb.unl.edu/dbCAN2/download/Tools/run_dbcan_v3.tar.gz
+RUN cd /build && tar -zxf run_dbcan_v3.tar.gz \
     && rm run_dbcan_v3.tar.gz \
-    && cd run_dbcan/db \
+    && cd /build/run_dbcan/db \
     && hmmpress  dbCAN-HMMdb-V8.txt \
     && hmmpress stp.hmm \
     && hmmpress tf-1.hmm \
     && hmmpress tf-2.hmm \
-    && diamond makedb --in CAZyDB.07312019.fa -d CAZy \
-    && diamond makedb --in tcdb.fa -d tcdb \
+    && diamond makedb --in CAZyDB.07312019.fa -d CAZy --threads 10 \
+    && diamond makedb --in tcdb.fa -d tcdb --threads 10 \
     && pip install natsort
