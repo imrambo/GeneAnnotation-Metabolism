@@ -35,4 +35,4 @@ RUN cd /build/dbCAN && wget http://bcb.unl.edu/dbCAN2/download/Tools/run_dbcan_v
     && hmmpress tf-2.hmm \
     && diamond makedb --in CAZyDB.07312019.fa -d CAZy \
     && diamond makedb --in tcdb.fa -d tcdb \
-    && pip intall natsort
+    && pip install natsort
