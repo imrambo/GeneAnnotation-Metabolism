@@ -25,7 +25,8 @@ RUN mkdir /build/DIAMOND && cd /build/DIAMOND \
 ENV PATH "$PATH:/build/DIAMOND"
 
 RUN mkdir /build/dbCAN
-RUN cd /build/dbCAN && wget http://bcb.unl.edu/dbCAN2/download/Tools/run_dbcan_v3.tar.gz \
+RUN cd /build/dbCAN && wget http://bcb.unl.edu/dbCAN2/download/Tools/run_dbcan_v3.tar.gz
+RUN cd /build/dbCAN \
     && tar -zxf run_dbcan_v3.tar.gz \
     && rm run_dbcan_v3.tar.gz \
     && cd run_dbcan/db \
