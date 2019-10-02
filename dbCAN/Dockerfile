@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y apt-utils \
     python-pip \
     && apt-get clean
 
+RUN mkdir /build
 RUN mkdir /build/DIAMOND && cd /build/DIAMOND \
     && wget http://github.com/bbuchfink/diamond/releases/download/v0.9.26/diamond-linux64.tar.gz \
     && tar -zxf diamond-linux64.tar.gz \
