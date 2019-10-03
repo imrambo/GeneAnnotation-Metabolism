@@ -32,13 +32,12 @@ RUN cd /build && tar -zxf run_dbcan_v3.tar.gz \
     && hmmpress stp.hmm \
     && hmmpress tf-1.hmm \
     && hmmpress tf-2.hmm \
-    && diamond makedb --in CAZyDB.07312019.fa -d CAZy --threads 10 \
-    && diamond makedb --in tcdb.fa -d tcdb --threads 10 \
+    && diamond makedb --in CAZyDB.07312019.fa -d CAZy --threads 4 \
+    && diamond makedb --in tcdb.fa -d tcdb --threads 4 \
     && pip install natsort
 
-RUN cd /build/run_dbcan/tools/signalp-4.1 \
-    #&& sed -i -e 's/\$ENV{SIGNALP}.*\;/$ENV{SIGNALP} = "\/build\/run_dbcan\/tools\/signalp-4.1";/' -e 's/my $outputDir.*\;/my $outputDir = "\/tmp"\;/' signalp
-    && sed -i -e '0,/\$ENV{SIGNALP}/s/\$ENV{SIGNALP}.*\;/$ENV{SIGNALP} = "\/build\/run_dbcan\/tools\/signalp-4.1";/' -e '0,/my $outputDir/s/my $outputDir.*\;/my $outputDir = "\/tmp"\;/' signalp
+# Customize signalp - add path for executable and temporary file path
+RUN sed -i -e '0,/\$ENV{SIGNALP}/s/\$ENV{SIGNALP}.*\;/$ENV{SIGNALP} = "\/build\/run_dbcan\/tools\/signalp-4.1";/' -e '0,/my $outputDir/s/my $outputDir.*\;/my $outputDir = "\/tmp"\;/' /build/run_dbcan/tools/signalp-4.1/signalp
 
 ENV PATH "$PATH:/build/run_dbcan/tools/FragGeneScan1.30"
 ENV PATH "$PATH:/build/run_dbcan/tools/prodigal"
