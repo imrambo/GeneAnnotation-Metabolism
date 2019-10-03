@@ -37,7 +37,8 @@ RUN cd /build && tar -zxf run_dbcan_v3.tar.gz \
     && pip install natsort
 
 RUN cd /build/run_dbcan/tools/signalp-4.1 \
-    && sed -i -e 's/\$ENV{SIGNALP}.*\;/$ENV{SIGNALP} = "\/build\/run_dbcan\/tools\/signalp-4.1";/' -e 's/my $outputDir.*\;/my $outputDir = "\/tmp"\;/' signalp
+    #&& sed -i -e 's/\$ENV{SIGNALP}.*\;/$ENV{SIGNALP} = "\/build\/run_dbcan\/tools\/signalp-4.1";/' -e 's/my $outputDir.*\;/my $outputDir = "\/tmp"\;/' signalp
+    && sed -i -e '0,/\$ENV{SIGNALP}/s/\$ENV{SIGNALP}.*\;/$ENV{SIGNALP} = "\/build\/run_dbcan\/tools\/signalp-4.1";/' -e '0,/my $outputDir/s/my $outputDir.*\;/my $outputDir = "\/tmp"\;/' signalp
 
 ENV PATH "$PATH:/build/run_dbcan/tools/FragGeneScan1.30"
 ENV PATH "$PATH:/build/run_dbcan/tools/prodigal"
